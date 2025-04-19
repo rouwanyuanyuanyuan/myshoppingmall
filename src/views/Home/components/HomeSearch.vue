@@ -1,115 +1,146 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import { searchProducts } from '@/apis/searchProducts.js';
-import Goodsitem from "@/views/Home/components/Goodsitem.vue";
-import HomePanel from "@/views/Home/components/HomePanel.vue"; // 引入你的封装接口
+import { ref, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { searchProducts } from '@/apis/searchProducts.js'
+import Goodsitem from "@/views/Home/components/Goodsitem.vue"
 
-// 获取当前路由
-const route = useRoute();
+const route = useRoute()
 
 // 响应式数据
-const keyword = ref(route.query.keyword || '');
-const products = ref([]);
-const total = ref(0);
-const page = ref(1);
-const limit = ref(10);
-const sort = ref(''); // 看你需求，比如 price_asc、rating_desc
+const keyword = ref(route.query.keyword || '')
+const products = ref([])
+const total = ref(0)
+const page = ref(1)
+const limit = ref(10)
+const sort = ref('')
 
 // 请求搜索商品数据
 const fetchProducts = async () => {
-  if (!keyword.value) return;
+  if (!keyword.value) return
   try {
     const res = await searchProducts({
       keyword: keyword.value,
       page: page.value,
       limit: limit.value,
       sort: sort.value
-    });
-    products.value = res.results;
-    total.value = res.total;
+    })
+    products.value = res.results
+    total.value = res.total
   } catch (error) {
-
-    console.error('error:', error);
-
+    console.error('Error fetching products:', error)
   }
-};
+}
 
-// 初始加载
-onMounted(fetchProducts);
-
-// 监听路由变化（关键词变化重新搜索）
+// 初始加载和监听路由变化
+onMounted(fetchProducts)
 watch(() => route.query.keyword, (newKeyword) => {
-  keyword.value = newKeyword;
-  page.value = 1; // 新搜索重置到第一页
-  fetchProducts();
-});
-
-
+  keyword.value = newKeyword
+  page.value = 1
+  fetchProducts()
+})
 </script>
 
 <template>
-  <div class="search-page">
-
-    <h2 style="color: palevioletred">result: "{{ keyword }}"</h2>
-
-    <!-- 搜索无结果 -->
-    <div v-if="products.length === 0">
-      <HomePanel title="404 NotFind" sub-title="QWQ">
-
-
-      </HomePanel>
+  <div class="search-results">
+    <div class="header">
+      <h3 v-if="products.length > 0" class="title">
+        Results for: "{{ keyword }}"
+        <small class="subtitle">We found {{ total }} items for you</small>
+      </h3>
+      <h3 v-else class="title">
+        No results found for: "{{ keyword }}"
+        <small class="subtitle">Please try another search term</small>
+      </h3>
     </div>
 
-    <!-- 搜索结果展示 -->
-    <div v-if="products.length !== 0">
-
-      <HomePanel title="Found for you:" sub-title="Please say thank you" >
-
-        <template #main>
-          <ul class="product-list">
-            <li v-for="item in products" :key="item.id">
-              <Goodsitem :goods="item"/>
-            </li>
-          </ul>
-        </template>
-      </HomePanel>
+    <div v-if="products.length > 0" class="product-list-container">
+      <div class="product-list">
+        <Goodsitem
+            v-for="item in products"
+            :key="item.id"
+            :goods="item"
+            class="product-item"
+        />
+      </div>
     </div>
-
-
-    <!-- 分页器（可选） -->
-    <!-- <el-pagination
-      v-if="total > limit"
-      layout="prev, pager, next"
-      :total="total"
-      :page-size="limit"
-      :current-page="page"
-      @current-change="handlePageChange"
-    /> -->
   </div>
 </template>
 
-<style scoped>
-.search-page {
-  padding: 20px;
+<style scoped lang="scss">
+.search-results {
+  background-color: #fff;
+  padding: 40px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  .header {
+    padding: 0 40px 40px;
+
+    .title {
+      font-size: 32px;
+      font-weight: normal;
+      color: #c75c8a;
+      margin-bottom: 10px;
+
+      .subtitle {
+        font-size: 16px;
+        color: #ff9db5;
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .product-list-container {
+    padding: 0 20px;
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      justify-items: center;
+
+      .product-item {
+        width: 100%;
+        max-width: 240px;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+        }
+      }
+    }
+  }
 }
 
-
-.product-list {
-  display: flex;
-  justify-content: space-between;
-  height: 406px;
-  flex-wrap: wrap;
+@media (max-width: 1200px) {
+  .product-list {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
 }
 
-.product-list li {
-  width: 250px;
-  height: 406px;
-
-  background: #fff;
-  display: flex; /* 添加 flex 布局 */
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
+@media (max-width: 992px) {
+  .product-list {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
 }
 
+@media (max-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .header {
+    padding: 0 20px 30px !important;
+
+    .title {
+      font-size: 28px !important;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .product-list {
+    grid-template-columns: 1fr !important;
+  }
+}
 </style>

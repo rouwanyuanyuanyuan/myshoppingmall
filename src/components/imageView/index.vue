@@ -13,10 +13,8 @@ const getGoods = async () => {
     console.log("res",res)
     goods.value = res
     console.log("Product details", goods.value)
-
-
     // mainPictures
-    //   imageList.value = goods.value.mainPictures
+    imageList.value = goods.value.mainPictures
   } catch (error) {
     console.error("Fetch store details failed", error)
   }
@@ -33,7 +31,7 @@ onMounted(() => {
   <div class="home-banner" v-if="imageList.length > 0">
     <el-carousel height="500px" trigger="click" indicator-position="outside">
       <el-carousel-item v-for="img in imageList" :key="img">
-        <img :src="img" alt="banner" />
+        <img :src="`/uploads/${img}`" alt="banner" />
       </el-carousel-item>
     </el-carousel>
   </div>

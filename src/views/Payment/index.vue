@@ -189,12 +189,6 @@ const handleSuccessfulPayment = async (cartStore) => {
       router.push('/cart')
       return
     }
-
-    //删除购物车内相应的商品
-      const deletePromises = selectedGoods.map(item =>
-          cartStore.delCart(item.itemId)
-      )
-      await Promise.all(deletePromises)
     
     // 5. 清除本地存储的购物车信息
     localStorage.removeItem('cartInfo')

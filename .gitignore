@@ -30,3 +30,5 @@ coverage
 *.tsbuildinfo
 
 /Config/application.yaml
+public/uploads
+/public/uploads/*

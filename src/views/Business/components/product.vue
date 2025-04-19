@@ -13,6 +13,7 @@ import ProductTable from '../components/components/ProductTable.vue'
 import ProductFormDialog from '../components/components/ProductFormDialog.vue'
 import PromotionDialog from '../components/components/PromotionDialog.vue'
 import dayjs from 'dayjs'
+import ProductComment from '../components/components/ProductComment.vue'
 
 // 商品数据相关
 const products = ref([])
@@ -97,11 +98,13 @@ const handleImageUpload = async ({ file, productId }) => {
 
   try {
     const res = await uploadImageAPI(productId, formData)
+    console.log(res,"image");
     if (res.imagePath) {
       // 更新对应商品的图片
       const product = products.value.find(p => p.productId === productId)
       if (product) {
         product.image = res.imagePath
+        console.log(product,"product")
       }
       ElMessage.success('Image uploaded successfully')
     } else {
@@ -190,7 +193,11 @@ const handleSelectionChange = (rows) => {
   selectedProducts.value = rows.map(item => item.productId)
 }
 
-
+const selectedProductIdForComments = ref('')
+const showComments = (productId) => {
+  console.log(productId,"tablepro")
+  selectedProductIdForComments.value = productId.productId
+}
 </script>
 
 <template>
@@ -222,6 +229,7 @@ const handleSelectionChange = (rows) => {
           @promotion="showBatchPromotionDialog"
           @upload="handleImageUpload"
           @select-multiple="handleSelectionChange"
+          @row-click="showComments"
       />
     </div>
 
@@ -240,6 +248,13 @@ const handleSelectionChange = (rows) => {
         @update:visible="val => promotionDialogVisible = val"
         @create="handleCreatePromotion"
     />
+
+    <ProductComment
+        :productId="selectedProductIdForComments"
+        v-if="selectedProductIdForComments"
+        class="comment-section"
+    />
+
   </div>
 </template>
 
@@ -304,5 +319,12 @@ const handleSelectionChange = (rows) => {
       border-color: #ffc0cb;
     }
   }
+}
+.comment-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 </style>

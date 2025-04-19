@@ -96,8 +96,8 @@ onMounted(() => {
             <div class="price-section">
               <div class="g-price">
                 <div v-if="promotionInfo" class="discounted-price">
-                  <span class="price">${{ promotionInfo.currentPrice }}</span>
-                  <span class="original-price">${{ promotionInfo.basePrice }}</span>
+                  <span class="price">￥{{ promotionInfo.currentPrice }}</span>
+                  <span class="original-price">￥{{ promotionInfo.basePrice }}</span>
                 </div>
                 <div v-else>
                   <span class="price">${{ goods.price }}</span>
