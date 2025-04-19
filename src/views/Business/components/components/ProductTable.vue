@@ -15,6 +15,7 @@
         <div class="action-buttons">
           <el-button size="small" @click="emit('edit', scope.row)">Edit</el-button>
           <el-button size="small" type="danger" @click="emit('delete', scope.row)">Delete</el-button>
+          <el-button size="small" @click="showComments(scope.row.productId)">View Comments</el-button>
           <el-upload
               class="upload-demo"
               action=""
@@ -33,20 +34,35 @@
       </template>
     </el-table-column>
   </el-table>
+  <el-dialog v-model="commentDialogVisible" title="Product Comments" width="50%">
+    <ProductComment v-if="commentDialogVisible" :product-id="selectedProductId" />
+  </el-dialog>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import ProductComment from '../components/ProductComment.vue';
+
 defineProps({
   products: {
     type: Array,
     required: true
   }
-})
+});
 
-const emit = defineEmits(['edit', 'delete', 'promotion', 'upload', 'select-multiple'])
+const emit = defineEmits(['edit', 'delete', 'promotion', 'upload', 'select-multiple']);
+
+const commentDialogVisible = ref(false);
+const selectedProductId = ref('');
+
 const handleSelectionChange = (val) => {
-  emit('select-multiple', val)
-}
+  emit('select-multiple', val);
+};
+
+const showComments = (productId) => {
+  selectedProductId.value = productId;
+  commentDialogVisible.value = true;
+};
 </script>
 
 <style scoped lang="scss">
