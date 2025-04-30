@@ -98,28 +98,6 @@ const handleCancelOrder = async (orderId) => {
   }
 }
 
-// 接受订单
-// const handleAcceptOrder = async (orderId) => {
-//   try {
-//     await ElMessageBox.confirm(
-//         '确认接受订单？',
-//         '确认',
-//         {
-//           confirmButtonText: '确认',
-//           cancelButtonText: '取消',
-//           type: 'success',
-//         }
-//     )
-//     await store.manageOrderAPI(orderId, 'accept')
-//     ElMessage.success('订单已接受')
-//     getOrders()
-//   } catch (error) {
-//     if (error !== 'cancel') {
-//       ElMessage.error('接受订单失败')
-//     }
-//   }
-// }
-
 // 组件加载时获取订单
 onMounted(() => {
   getOrders()
@@ -181,6 +159,28 @@ onMounted(() => {
                     <span class="product-quantity">×{{ item.quantity }}</span>
                   </div>
                   <span class="product-price">¥{{ (item.price * item.quantity).toFixed(2) }}</span>
+                </div>
+              </div>
+
+              <div class="shipping-info" v-if="order.city || order.address || order.postalCode">
+                <h4 class="info-title">Shipping Information</h4>
+                <div class="info-content">
+                  <div class="info-row">
+                    <span class="info-label">City:</span>
+                    <span class="info-value">{{ order.city }}</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Address:</span>
+                    <span class="info-value">{{ order.address }}</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Postal Code:</span>
+                    <span class="info-value">{{ order.postalCode }}</span>
+                  </div>
+                  <div class="info-row" v-if="order.trackingNumber && (order.status === 'shipping' || order.status === 'finished')">
+                    <span class="info-label">Tracking Number:</span>
+                    <span class="info-value">{{ order.trackingNumber }}</span>
+                  </div>
                 </div>
               </div>
 
@@ -337,6 +337,68 @@ onMounted(() => {
 .product-list {
   margin-bottom: 16px;
 }
+
+.shipping-info {
+  margin: 20px 0;
+  padding: 0;
+
+  .info-title {
+    color: #e23d7d;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    padding-left: 8px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 14px;
+      background-color: #e23d7d;
+      border-radius: 2px;
+    }
+  }
+
+  .info-content {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 1px 2px rgba(226, 61, 125, 0.1);
+  }
+
+  .info-row {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: flex-start;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .info-label {
+    font-weight: 500;
+    color: #e23d7d;
+    margin-right: 12px;
+    min-width: 120px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  .info-value {
+    color: #333;
+    font-size: 14px;
+    flex: 1;
+    word-break: break-word;
+    line-height: 1.5;
+    padding-top: 1px; /* 微调对齐 */
+  }
+}
+
 
 .product-item {
   display: flex;

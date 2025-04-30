@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, computed } from "vue";
 import { useOrderStore } from "@/stores/orderStore";
-import {  ShoppingCart } from '@element-plus/icons-vue';
+import {  ShoppingCart,Van } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
 import {useCartStore} from "@/stores/cartStore.js";
 import Comment from "@/views/Member/Components/comment.vue";
@@ -153,6 +153,14 @@ onMounted(() => getOrderList());
                           @submit-success="handleCommentSuccess"
                       />
                     </div>
+                  </div>
+                </div>
+
+                <div class="tracking-info" v-if="order.trackingNumber && (order.status === 'shipping' || order.status === 'finished')">
+                  <el-icon><Van /></el-icon>
+                  <div class="tracking-number">
+                    <span class="label">Tracking Number:</span>
+                    <span class="value">{{ order.trackingNumber }}</span>
                   </div>
                 </div>
 
@@ -331,6 +339,33 @@ onMounted(() => getOrderList());
           }
         }
       }
+
+      .tracking-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        margin: 12px 0;
+        background: #f5f7fa;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .tracking-info .el-icon {
+        color: #606266;
+      }
+
+      .tracking-number {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .label {
+        color: #909399;
+        font-weight: 500;
+      }
+
 
       .order-details {
         padding: 20px;

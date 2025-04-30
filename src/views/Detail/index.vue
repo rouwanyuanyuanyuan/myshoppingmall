@@ -45,6 +45,7 @@ const getGoods = async () => {
   try {
     const res = await getProductById(route.params.id);
     goods.value = res;
+    console.log(goods,"goods");
   } catch (error) {
     console.error("Fetch store details failed", error);
   }
@@ -113,6 +114,20 @@ onMounted(() => {
                   <span class="price">${{ goods.price }}</span>
                 </div>
                 <span class="stock">Stock: {{ goods.stock }} items</span>
+              </div>
+            </div>
+
+            <div class="seller-info">
+              <h3 class="seller-title">Seller</h3>
+              <div class="seller-details">
+                <div class="seller-field">
+                  <span class="label">Name:</span>
+                  <span class="value">{{ goods.sellerName }}</span>
+                </div>
+                <div class="seller-field">
+                  <span class="label">Email:</span>
+                  <a :href="`mailto:${goods.sellerEmail}`" class="value">{{ goods.sellerEmail }}</a>
+                </div>
               </div>
             </div>
 
@@ -261,6 +276,51 @@ onMounted(() => {
       font-size: 14px;
       margin-left: 15px;
       font-weight: 500;
+    }
+  }
+
+  .seller-info {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 6px;
+
+    .seller-title {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .seller-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .seller-field {
+      display: flex;
+      align-items: center;
+
+      .label {
+        width: 60px;
+        color: #666;
+        font-size: 14px;
+      }
+
+      .value {
+        color: #333;
+        font-size: 14px;
+      }
+
+      a.value {
+        color: #409eff;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 

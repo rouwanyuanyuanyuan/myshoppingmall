@@ -4,7 +4,7 @@ import request from "@/utils/http";
 
 export const getSalesTrendData = ({ year, month, detail = true }) => {
   return request({
-    url: "/api/seller/reports/monthly",
+    url: "/api/v1/seller/reports/monthly",
     method: "GET",
     params: {
       year,
