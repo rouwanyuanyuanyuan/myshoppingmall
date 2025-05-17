@@ -33,10 +33,10 @@
     >
       <el-form :model="addressForm" ref="addressFormRef" :rules="rules" label-width="100px">
         <el-form-item label="Zip code" prop="postalCode">
-          <el-input v-model="addressForm.postalCode" placeholder="Please enter the name of the consignee"/>
+          <el-input v-model="addressForm.postalCode" placeholder="Please enter the postal code"/>
         </el-form-item>
         <el-form-item label="Receiving city" prop="city">
-          <el-input v-model="addressForm.city" placeholder="Please enter your contact number"/>
+          <el-input v-model="addressForm.city" placeholder="Please enter your receiving city"/>
         </el-form-item>
         <el-form-item label="Full address" prop="address">
           <el-input type="textarea" v-model="addressForm.address" placeholder="Please enter your address details"/>
