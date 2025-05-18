@@ -29,7 +29,7 @@
         </div>
         <el-image
             v-if="scope.row.image"
-            :src="`/uploads/${scope.row.image}`"
+            :src="scope.row.image"
             class="product-image"
         ></el-image>
       </template>
