@@ -4,7 +4,7 @@ import request from '@/utils/http'
 // 加入购物车
 export const addItemToCartAPI = ({ productId, quantity }) => {
   return request({
-    url: '/api/v1/cart/items',
+    url: '/api/v2/cart/items',
     method: 'POST',
     data: {
     productId,
@@ -16,7 +16,7 @@ export const addItemToCartAPI = ({ productId, quantity }) => {
 // 获取购物车列表
 export const getCartContentsAPI = () => {
   return request({
-    url: '/api/v1/cart',
+    url: '/api/v2/cart',
     method: 'GET',
   })
 }
@@ -24,7 +24,7 @@ export const getCartContentsAPI = () => {
 // 删除购物车
 export const deleteCartItemAPI = (itemId) => {
   return request({
-    url: `/api/v1/cart/items/${itemId}`,
+    url: `/api/v2/cart/items/${itemId}`,
     method: 'DELETE',
     // data: {
     //   itemId
@@ -35,7 +35,7 @@ export const deleteCartItemAPI = (itemId) => {
 //修改购物车商品数量
 export const updateCartItemQuantityAPI = ({ itemId, quantity }) => {
   return request({
-    url: `/api/v1/cart/items/${itemId}`, // 确保 itemId 正确替换
+    url: `/api/v2/cart/items/${itemId}`, // 确保 itemId 正确替换
     method: 'PUT',
     data: quantity !== undefined ? { quantity } : {}, // 只有当 quantity 存在时才传递
   });
@@ -48,7 +48,7 @@ export const updateCartItemQuantityAPI = ({ itemId, quantity }) => {
  */
 export const getCartInfoAPI = () => {
     return request({
-        url: '/api/v1/cart',
+        url: '/api/v2/cart',
         method: 'GET'
     });
 };

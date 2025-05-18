@@ -4,7 +4,7 @@ import request from '@/utils/http.js'
 // 查看商品
 export const getproductsList = (data) => {
     return request({
-        url: '/api/v1/seller/products',
+        url: '/api/v2/seller/products',
         method: 'get',
         data
     })
@@ -12,7 +12,7 @@ export const getproductsList = (data) => {
 //修改商品信息
 export const reviseProducts = (data,productId) => {
     return request({
-        url: `/api/v1/seller/products/${productId}`,
+        url: `/api/v2/seller/products/${productId}`,
         method: 'put',
         data
     })
@@ -21,7 +21,7 @@ export const reviseProducts = (data,productId) => {
 //删除商品
 export const deleteProducts = (productId) => {
     return request({
-        url: `/api/v1/seller/products/${productId}`,
+        url: `/api/v2/seller/products/${productId}`,
         method: 'delete',
         
     })
@@ -30,7 +30,7 @@ export const deleteProducts = (productId) => {
 //上架商品
 export const putawayProducts = (data) => {
     return request({
-        url: `/api/v1/seller/products`,
+        url: `/api/v2/seller/products`,
         method: 'post',
         data
     })
@@ -59,7 +59,7 @@ export const viewOrders = () => {
  */
 export const manageOrderAPI = (orderId, action, trackingNumber = '') => {
     return request({
-        url: `/api/v1/seller/orders/${orderId}`,
+        url: `/api/v2/seller/orders/${orderId}`,
         method: 'PUT',
         data: {
             action,
@@ -71,7 +71,7 @@ export const manageOrderAPI = (orderId, action, trackingNumber = '') => {
 //添加商品
 export const addProducts = (data) => {
     return request({
-        url: `/api/v1/seller/products`,
+        url: `/api/v2/seller/products`,
         method: 'post',
         data
     })
@@ -89,7 +89,7 @@ export const uploadImageAPI = (productId, formData) => {
         return Promise.reject("Product ID is missing");
     }
     return request({
-        url: `/api/v1/image/${productId}`,  // 确保这个 URL 路径正确
+        url: `/api/v2/image/${productId}`,  // 确保这个 URL 路径正确
         method: 'POST',
         data: formData,
     });
@@ -105,7 +105,7 @@ export const uploadImageAPI = (productId, formData) => {
  */
 export const createPromotion = ({ productIds, discountRate, startDate, endDate }) => {
     return request({
-        url: '/api/v1/seller/promotions',
+        url: '/api/v2/seller/promotions',
         method: 'POST',
         data: {
             productId: productIds, // 注意接口要求是productId字段而不是productIds

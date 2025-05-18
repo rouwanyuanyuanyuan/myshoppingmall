@@ -11,7 +11,7 @@ import request from '@/utils/http'
  */
 export const manageOrderAPI = (orderId, data) => {
     return request({
-        url: `/api/v1/seller/orders/${orderId}`,
+        url: `/api/v2/seller/orders/${orderId}`,
         method: 'PUT',
         data: data
     });

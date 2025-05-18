@@ -21,7 +21,7 @@ export const viewsOrders = (params) => {
  */
 export const addAddressAPI = (addressData) => {
     return request({
-        url: '/api/v1/users/address',
+        url: '/api/v2/users/address',
         method: 'POST',
         data: addressData
     });
@@ -38,7 +38,7 @@ export const addAddressAPI = (addressData) => {
  */
 export const updateAddressAPI = (addressId, addressData) => {
     return request({
-        url: `/api/v1/users/address/${addressId}`,  // 使用模板字符串动态插入 addressId
+        url: `/api/v2/users/address/${addressId}`,  // 使用模板字符串动态插入 addressId
         method: 'PUT',
         data: addressData
     });
@@ -52,7 +52,7 @@ export const updateAddressAPI = (addressId, addressData) => {
  */
 export const deleteAddressAPI = (addressId) => {
     return request({
-        url: `/api/v1/users/address/${addressId}`,
+        url: `/api/v2/users/address/${addressId}`,
         method: 'DELETE'
     });
 };
@@ -63,7 +63,7 @@ export const deleteAddressAPI = (addressId) => {
  */
 export const getAddressListAPI = () => {
     return request({
-        url: '/api/v1/users/address',
+        url: '/api/v2/users/address',
         method: 'GET'
     });
 };
@@ -71,7 +71,7 @@ export const getAddressListAPI = () => {
 // 获取我的收藏列表
 export const getMyCollect = (page=1,limit=5) => {
     return request({
-        url: '/api/v1/users/favorites',
+        url: '/api/v2/users/favorites',
         method: 'GET',
         params:{
             page,
@@ -83,7 +83,7 @@ export const getMyCollect = (page=1,limit=5) => {
 //移出收藏
 export const removeCollect = (id) => {
     return request({
-        url: `/api/v1/users/favorites/${id}`,
+        url: `/api/v2/users/favorites/${id}`,
         method: 'DELETE'
     })
 };
@@ -91,7 +91,7 @@ export const removeCollect = (id) => {
 // 添加商品收藏
 export const addCollect = (productId) => {
     return request({
-        url: `/api/v1/users/favorites/${productId}`,
+        url: `/api/v2/users/favorites/${productId}`,
         method: 'POST',
     })
 }

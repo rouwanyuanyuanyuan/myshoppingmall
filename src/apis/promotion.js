@@ -2,5 +2,5 @@
 import httpInstance from "@/utils/http";
 
 export const getActivePromotions = () => {
-  return httpInstance.get("/api/v1/promotions/active");
+  return httpInstance.get("/api/v2/promotions/active");
 };

@@ -8,7 +8,7 @@ export const getProductById = (productId) => {
 // 获取评价
 export const getEvaluate = ({ productId, page = 1, limit = 10 }) => {
   return httpInstance({
-    url: `/api/v1/products/${productId}/reviews`,
+    url: `/api/v2/products/${productId}/reviews`,
     method: "get",
     params: {
       page,
@@ -20,7 +20,7 @@ export const getEvaluate = ({ productId, page = 1, limit = 10 }) => {
 // 提交评价
 export const submitEvaluate = ({ productId, orderId, rating, comment }) => {
   return httpInstance({
-    url: `/api/v1/products/${productId}/reviews`,
+    url: `/api/v2/products/${productId}/reviews`,
     method: "post",
     data: { comment, rating, orderId },
   });

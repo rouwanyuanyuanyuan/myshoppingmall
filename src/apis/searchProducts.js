@@ -10,7 +10,7 @@ import httpInstance from '@/utils/http' // 你的axios封装文件路径
  * @returns Promise
  */
 export const searchProducts = (params) => {
-    return httpInstance.get('/api/v1/products/search', {  //这个是已经调整好的获取所有商品的接口
+    return httpInstance.get('/api/v2/products/search', {  //这个是已经调整好的获取所有商品的接口
         params: {
             keyword: params.keyword || '',
             page: params.page || 1,

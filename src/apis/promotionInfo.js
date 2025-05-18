@@ -2,5 +2,5 @@
 import httpInstance from "@/utils/http";
 
 export const getPromotionByProductId = (productId) => {
-  return httpInstance.get(`/api/v1/products/${productId}/promotion`);
+  return httpInstance.get(`/api/v2/products/${productId}/promotion`);
 };

@@ -9,7 +9,7 @@ import request from '@/utils/http'
  */
 export const submitOrderAPI = (cartId, orderCreateVO) => {
     return request({
-        url: `/api/v1/orders/${cartId}`,  // 请求路径与后端一致
+        url: `/api/v2/orders/${cartId}`,  // 请求路径与后端一致
         method: 'POST',                // 请求方法为 POST
         data: orderCreateVO,           // 请求体数据，确保传递了订单创建信息
     });
@@ -22,7 +22,7 @@ export const submitOrderAPI = (cartId, orderCreateVO) => {
  */
 export const cancelOrderAPI = (orderId) => {
     return request({
-        url: `/api/v1/orders/${orderId}`, // 请求路径与后端一致
+        url: `/api/v2/orders/${orderId}`, // 请求路径与后端一致
         method: 'DELETE',             // 请求方法为 DELETE
     });
 };
@@ -33,7 +33,7 @@ export const cancelOrderAPI = (orderId) => {
  */
 export const finsihOrderAPI = (orderId) => {
     return request({
-        url: `/api/v1/orders/${orderId}/confirm`, // 请求路径与后端一致
+        url: `/api/v2/orders/${orderId}/confirm`, // 请求路径与后端一致
         method: 'PUT',             // 请求方法为 DELETE
     });
 };
