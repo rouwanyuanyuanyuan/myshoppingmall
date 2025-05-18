@@ -122,7 +122,7 @@ onMounted(() => {
                 </div>
               </td>
               <td class="tc">
-                <p>&yen;{{ i.price }}</p>
+                <p>&yen;{{ i.price.toFixed(2) }}</p>
               </td>
               <td class="tc">
                 <el-input-number
