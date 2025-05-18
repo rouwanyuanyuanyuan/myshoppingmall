@@ -31,7 +31,7 @@ onMounted(() => {
   <div class="home-banner" v-if="imageList.length > 0">
     <el-carousel height="500px" trigger="click" indicator-position="outside">
       <el-carousel-item v-for="img in imageList" :key="img">
-        <img :src="`/uploads/${img}`" alt="banner" />
+        <img :src="img" alt="banner" />
       </el-carousel-item>
     </el-carousel>
   </div>
