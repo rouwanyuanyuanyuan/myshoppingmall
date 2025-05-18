@@ -151,6 +151,7 @@ onMounted(() => getOrderList());
                           :product-id="item.productId"
                           :order-id="order.orderId"
                           @submit-success="handleCommentSuccess"
+                          v-if="order.status === 'finished'"
                       />
                     </div>
                   </div>
