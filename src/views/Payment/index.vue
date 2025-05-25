@@ -217,7 +217,7 @@ const handleSuccessfulPayment = async (cartStore) => {
       <div class="wrapper">
         <div class="payment-amount">
           <span class="amount-label">Payment Amount:</span>
-          <span class="amount-value">¥{{ totalAmount.toFixed(2) }}</span>
+          <!-- <span class="amount-value">¥{{ totalAmount.toFixed(2) }}</span> -->
         </div>
         <h3 class="box-title">Select a payment method</h3>
 
