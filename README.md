@@ -1,6 +1,9 @@
 # myshoppingmall
 该项目为西电25春spm前端代码
 
+## 致谢
+历时一个学期的tafeimall完美收官！！完结撒花🥰 感谢给我们前端项目做出贡献的大家，各位都辛苦了！！！
+
 ## 运行环境:
 
 ***请复制在根目录下的Config文件夹下的application_sample，将其重命名为application.yaml，此后进行baseurl的修改请在application.yaml中进行***
